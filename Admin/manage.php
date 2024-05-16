@@ -36,7 +36,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Emaili është i pavlefshëm.";
         } else {
             if ($action == 'register_professor') {
+                error_log("Regjistrimi i profesorit filloi.");
                 registerUser($username, $password, $name, $email, 'Professor');
+                error_log("Regjistrimi i profesorit përfundoi.");
             } else {
                 $userID = $_POST['user_id'];
                 updateUser($userID, $username, $name, $email, $password);

@@ -24,6 +24,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] != 'Admin') {
                 <li><a href="index.php?action=manage_professors">Menaxho Profesorët</a></li>
                 <li><a href="index.php?action=manage_subjects">Menaxho Lëndët</a></li>
                 <li><a href="index.php?action=assign_subject">Cakto Lëndë Profesorëve</a></li>
+                
             </ul>
         </nav>
     </header>

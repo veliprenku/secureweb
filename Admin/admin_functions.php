@@ -114,7 +114,11 @@ function deleteSubject($subjectID) {
 
 function getSubjects() {
     global $conn;
-    $result = $conn->query("SELECT * FROM Subjects");
+    $result = $conn->query("SELECT SubjectID, SubjectName FROM Subjects");
+    if (!$result) {
+        error_log("Gabim në query: " . $conn->error);
+        die("Gabim në query.");
+    }
     return $result->fetch_all(MYSQLI_ASSOC);
 }
 
@@ -131,13 +135,39 @@ function getSubjectByID($subjectID) {
 
 function assignSubject($professorID, $subjectID) {
     global $conn;
+    error_log("ProfessorID: " . $professorID);
+    error_log("SubjectID: " . $subjectID);
+
     $stmt = $conn->prepare("UPDATE Subjects SET ProfessorID = ? WHERE SubjectID = ?");
+    if (!$stmt) {
+        error_log("Gabim në përgatitjen e deklaratës: " . $conn->error);
+        die("Gabim në përgatitjen e deklaratës.");
+    }
+
     $stmt->bind_param("ii", $professorID, $subjectID);
 
     if ($stmt->execute()) {
         echo "Lënda u caktua me sukses.";
     } else {
         echo "Gabim gjatë caktimit të lëndës. Ju lutemi provoni përsëri.";
+    }
+    $stmt->close();
+}
+
+function createAssignment($subjectID, $professorID, $title, $description, $dueDate) {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO Assignments (SubjectID, ProfessorID, Title, Description, DueDate) VALUES (?, ?, ?, ?, ?)");
+    if ($stmt === false) {
+        error_log("Gabim gjatë përgatitjes së deklaratës: " . $conn->error);
+        die("Gabim gjatë përgatitjes së deklaratës.");
+    }
+    $stmt->bind_param("iisss", $subjectID, $professorID, $title, $description, $dueDate);
+
+    if ($stmt->execute()) {
+        echo "Detyra u krijua me sukses.";
+    } else {
+        error_log("Gabim gjatë ekzekutimit: " . $stmt->error);
+        echo "Gabim gjatë krijimit të detyrës. Ju lutemi provoni përsëri.";
     }
     $stmt->close();
 }

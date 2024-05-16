@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo ucfirst($action) == 'add_subject' ? 'Shto' : 'Edito'; ?> Lëndë</title>
+    <title><?php echo ucfirst($action) == 'register_subject' ? 'Regjistro' : 'Edito'; ?> Lëndë</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <header>
-        <h1><?php echo ucfirst($action) == 'add_subject' ? 'Shto' : 'Edito'; ?> Lëndë</h1>
+        <h1><?php echo ucfirst($action) == 'register_subject' ? 'Regjistro' : 'Edito'; ?> Lëndë</h1>
     </header>
 
     <main>
@@ -19,7 +19,7 @@
             <?php endif; ?>
             <label for="subject_name">Emri i Lëndës:</label>
             <input type="text" id="subject_name" name="subject_name" value="<?php echo $subject['SubjectName'] ?? ''; ?>" required><br>
-            <input type="submit" value="<?php echo ucfirst($action) == 'add_subject' ? 'Shto' : 'Përditëso'; ?>">
+            <input type="submit" value="<?php echo ucfirst($action) == 'register_subject' ? 'Regjistro' : 'Përditëso'; ?>">
         </form>
     </main>
 

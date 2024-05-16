@@ -17,7 +17,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Emri i Lëndës</th>
-                    <th>ID i Profesorit</th>
+                    <th>Profesor</th>
                     <th>Veprime</th>
                 </tr>
             </thead>
@@ -26,7 +26,7 @@
                 <tr>
                     <td><?php echo $subject['SubjectID']; ?></td>
                     <td><?php echo $subject['SubjectName']; ?></td>
-                    <td><?php echo $subject['ProfessorID']; ?></td>
+                    <td><?php echo $subject['ProfessorID'] ? getUserByID($subject['ProfessorID'])['Name'] : 'Nuk ka profesor'; ?></td>
                     <td>
                         <a href="index.php?action=edit_subject&id=<?php echo $subject['SubjectID']; ?>">Edito</a> |
                         <a href="index.php?action=delete_subject&id=<?php echo $subject['SubjectID']; ?>" onclick="return confirm('A jeni i sigurt që doni të fshini këtë lëndë?');">Fshi</a>
@@ -35,7 +35,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-        <a href="index.php?action=add_subject">Shto Lëndë të Re</a>
+        <a href="index.php?action=register_subject">Shto Lëndë</a>
     </main>
 
     <footer>
